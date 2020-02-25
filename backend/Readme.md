@@ -5,3 +5,9 @@ https://www.youtube.com/watch?v=IjX6-XV0LiM
 
 from dist folder
 PORT=8080 NODE_ENV=production node server.js
+
+after set up, first command
+npm run watch-ts
+
+to watch files 
+npm run watch
