@@ -1,17 +1,26 @@
+import * as bodyParser from 'body-parser';
 import * as cors from "cors";
 import * as express from "express";
 import * as mongoose from "mongoose";
 import { ATLAS_URI } from './config';
+import * as userController from './controllers/userController';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.set("port", port);
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 
 app.get('/', (req: any, res:any) => {
     res.send("API Home");
 });
+
+app.get('/users', userController.allUsers);
+app.get('/user/:id', userController.getUser);
+app.post('/user', userController.addUser);
+app.delete('/user/:id', userController.deleteUser);
+app.put('/user/:id', userController.updateUser);
 
 const mongooseOptions = { useNewUrlParser: true, useUnifiedTopology: true }
 mongoose.connect(ATLAS_URI, mongooseOptions)
