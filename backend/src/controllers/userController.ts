@@ -1,14 +1,6 @@
 import { Request, Response } from 'express';
+import { IUser } from '../models/user.model';
 import User from '../models/users';
-
-interface IUser {
-    email: string,
-    fullname: string,
-    password: string,
-    gender: string,
-    mobile: number,
-    courses: string[]
-}
 
 // - GET - /users # returns all users
 export let allUsers = (req: Request, res: Response) => {
