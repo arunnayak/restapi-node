@@ -7,7 +7,6 @@ import { ATLAS_URI } from './config';
 import * as userController from './controllers/userController';
 import * as swaggerDocument from './swagger.json';
 
-
 const app = express();
 const port = process.env.PORT || 8080;
 app.set("port", port);
@@ -16,7 +15,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.get('/', (req: any, res:any) => {
-    res.send("API Home");
+    res.send("Tech trainers API Home");
 });
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
