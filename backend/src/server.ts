@@ -2,8 +2,11 @@ import * as bodyParser from 'body-parser';
 import * as cors from "cors";
 import * as express from "express";
 import * as mongoose from "mongoose";
+import * as swaggerDocument from 'swagger-ui-express';
+import * as swaggerUi from 'swagger-ui-express';
 import { ATLAS_URI } from './config';
 import * as userController from './controllers/userController';
+
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -15,6 +18,9 @@ app.use(bodyParser.json());
 app.get('/', (req: any, res:any) => {
     res.send("API Home");
 });
+
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/swagger/api', userController.addUser);
 
 app.get('/users', userController.allUsers);
 app.get('/user/:id', userController.getUser);

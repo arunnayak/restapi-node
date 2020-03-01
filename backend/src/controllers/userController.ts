@@ -28,13 +28,13 @@ export let addUser = (req: Request, res: Response) => {
 export let deleteUser = (req: Request, res: Response) => {
     User.deleteOne({ _id: req.params.id }, (err: any) => {
         if (err) { res.send(err); return };
-        res.send('Successfully deleted the book');
+        res.send('Successfully deleted the user');
     });
 }
 // - PUT - /user # updates a user with id i
 export let updateUser = (req: Request, res: Response) => {
     User.findByIdAndUpdate(req.params.id, req.body, (err: any, user: any) => {
         if (err) { res.send(err); return };
-        res.send('Successfully updated the book');
+        res.send('Successfully updated the user');
     });
 }
