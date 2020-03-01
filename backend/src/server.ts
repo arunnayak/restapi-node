@@ -2,10 +2,10 @@ import * as bodyParser from 'body-parser';
 import * as cors from "cors";
 import * as express from "express";
 import * as mongoose from "mongoose";
-import * as swaggerDocument from 'swagger-ui-express';
 import * as swaggerUi from 'swagger-ui-express';
 import { ATLAS_URI } from './config';
 import * as userController from './controllers/userController';
+import * as swaggerDocument from './swagger.json';
 
 
 const app = express();

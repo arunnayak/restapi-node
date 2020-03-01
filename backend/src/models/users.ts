@@ -12,7 +12,10 @@ const userSchema = new mongoose.Schema({
         match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
     },
     fullname: { type: String, required: true, maxlength: 30 },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    gender: { type: String, required: true },
+    mobile: { type: Number, required: true },
+    courses: { type: Array, required: true }
     }, 
     {
     timestamps: true
