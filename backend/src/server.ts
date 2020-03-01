@@ -4,10 +4,11 @@ import * as express from "express";
 import * as mongoose from "mongoose";
 import * as swaggerUi from 'swagger-ui-express';
 import { ATLAS_URI } from './config';
-import * as userController from './controllers/userController';
+import { Routes } from './routes/userRoutes';
 import * as swaggerDocument from './swagger.json';
 
 const app = express();
+const _route: Routes = new Routes();
 const port = process.env.PORT || 8080;
 app.set("port", port);
 app.use(cors());
@@ -19,13 +20,13 @@ app.get('/', (req: any, res:any) => {
 });
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.use('/swagger/api', userController.addUser);
+app.use('/user', _route.routes(app));
 
-app.get('/users', userController.allUsers);
-app.get('/user/:id', userController.getUser);
-app.post('/user', userController.addUser);
-app.delete('/user/:id', userController.deleteUser);
-app.put('/user/:id', userController.updateUser);
+// app.get('/users', userController.allUsers);
+// app.get('/user/:id', userController.getUser);
+// app.post('/user', userController.addUser);
+// app.delete('/user/:id', userController.deleteUser);
+// app.put('/user/:id', userController.updateUser);
 
 const mongooseOptions = { useNewUrlParser: true, useUnifiedTopology: true }
 mongoose.connect(ATLAS_URI, mongooseOptions)
