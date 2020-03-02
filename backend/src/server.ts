@@ -1,6 +1,5 @@
-import app from './app';
 import * as http from 'http';
-import * as fs from 'fs';
+import app from './app';
 
 const PORT = process.env.PORT || 8080;
 

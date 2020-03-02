@@ -27,6 +27,15 @@ class App {
         // serving static files 
         //this.app.use(express.static('public'));
     }
+    private createHomePage(msg: string): void {
+        this.app.get('/', (req: any, res: any) => {
+            res.send(`
+            <h3>Tech trainers API Home</h3>
+            <div>${msg}</div>
+            <a href='/swagger'>Swagger</a>`
+            );
+        });
+    }
     private swaggerSetup(): void {
         this.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     }
@@ -34,10 +43,12 @@ class App {
         const mongooseOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         mongoose.connect(ATLAS_URI, mongooseOptions)
             .then(() => {
-                console.log('connected to database');
+                // console.log('connected to database');
+                this.createHomePage('Connected to database');
             }, function (error: Error) {
-                console.log('error connecting database');
-                console.log(error);
+                // console.log('error connecting database');
+                this.createHomePage(`Error connecting database <br/> ${error}`);
+                // console.log(error);
             });
     }
 
