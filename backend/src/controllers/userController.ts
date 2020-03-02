@@ -4,7 +4,7 @@ import User from '../models/users';
 
 export class UserController {
     // - GET - /users # returns all users
-    public allUsers(req: Request, res: Response){
+    public getAllUsers(req: Request, res: Response){
         let users = User.find((err: Error, users: IUser) => {
             if (err) { res.send(err); return };
             res.send(users);
