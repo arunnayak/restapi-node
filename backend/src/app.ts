@@ -24,8 +24,6 @@ class App {
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(cors());
         this.app.use(express.json());
-        // serving static files 
-        //this.app.use(express.static('public'));
     }
     private createHomePage(msg: string): void {
         this.app.get('/', (req: any, res: any) => {
