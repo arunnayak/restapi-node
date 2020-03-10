@@ -1,7 +1,7 @@
 import * as http from 'http';
 import app from './app';
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 
 // const httpsOptions = {
 //     key: fs.readFileSync('./key.pem'),

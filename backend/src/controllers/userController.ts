@@ -1,8 +1,12 @@
 import { Request, Response } from 'express';
 import { IUser } from '../models/user.model';
 import User from '../models/users';
+import { PasswordController } from './password.controller';
 
-export class UserController {
+export class UserController extends PasswordController {
+    constructor(){
+        super();
+    }
     // - GET - /users # returns all users
     public getAllUsers(req: Request, res: Response){
         let users = User.find((err: Error, users: IUser) => {
@@ -20,7 +24,9 @@ export class UserController {
     // - POST - /user/{i} # insert new user into the table
     public addUser(req: Request, res: Response){
         let user = new User(req.body);
-
+        const passwordData = super.saltHashPassword(user.password);
+        user.password = passwordData.passwordHash;
+        user.salt = passwordData.salt;
         user.save((err: any) => {
             if (err) { res.send(err); return };
             res.send(user);
