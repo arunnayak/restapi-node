@@ -1,6 +1,7 @@
 import * as crypto from "crypto";
 
 export class PasswordController {
+
     private genRandomString(length:number){
         return crypto.randomBytes(Math.ceil(length/2))
                 .toString('hex') /** convert to hexadecimal format */
@@ -21,5 +22,10 @@ export class PasswordController {
         const salt = PasswordController.prototype.genRandomString(16); /** Gives us salt of length 16 */
         const passwordData = PasswordController.prototype.sha512(userpassword, salt);
         return passwordData;
+    }
+
+    public validatePassword(password: string, salt: string, hash: string) {
+        const _hash = crypto.pbkdf2Sync(password,  salt, 1000, 64, 'sha512').toString('hex'); 
+        return hash === _hash; 
     }
 }
