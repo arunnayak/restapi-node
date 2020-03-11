@@ -1,4 +1,3 @@
-import * as crypto from "crypto";
 import { Request, Response } from 'express';
 import { IUser } from '../models/user.model';
 import User from '../models/users';
@@ -25,9 +24,9 @@ export class UserController extends PasswordController {
     // - POST - /user/{i} # insert new user into the table
     public addUser(req: Request, res: Response){
         let user = new User(req.body);
-        user.salt = crypto.randomBytes(16).toString('hex');
-        user.password = crypto.pbkdf2Sync(user.password, user.salt,  
-            1000, 64, 'sha512').toString('hex');
+        const credentials = super.saltHashPassword(user.password);
+        user.password = credentials.password;
+        user.salt = credentials.salt;
         user.save((err: any) => {
             if (err) { res.send(err); return };
             res.send(user);

@@ -18,12 +18,22 @@ export class PasswordController {
         };
     };
 
-    public saltHashPassword(userpassword: string) {
-        const salt = PasswordController.prototype.genRandomString(16); /** Gives us salt of length 16 */
-        const passwordData = PasswordController.prototype.sha512(userpassword, salt);
-        return passwordData;
+    // public saltHashPassword(userpassword: string) {
+    //     const salt = PasswordController.prototype.genRandomString(16); /** Gives us salt of length 16 */
+    //     const passwordData = PasswordController.prototype.sha512(userpassword, salt);
+    //     return passwordData;
+    // }
+    public saltHashPassword(password: string){
+        const salt = crypto.randomBytes(16).toString('hex');
+        const pwd = crypto.pbkdf2Sync(password, salt,  
+            1000, 64, 'sha512').toString('hex');
+        return{
+            salt: salt,
+            password: pwd
+        }
     }
 
+    // https://www.geeksforgeeks.org/node-js-password-hashing-crypto-module/
     public validatePassword(password: string, salt: string, hash: string) {
         const _hash = crypto.pbkdf2Sync(password,  salt, 1000, 64, 'sha512').toString('hex'); 
         return hash === _hash; 

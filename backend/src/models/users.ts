@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     },
     fullname: { type: String, required: true, maxlength: 50 },
     password: { type: String, required: true},
-    salt: {type: String, required: true},
+    salt: {type: String, required: true, select: false},
     gender: { type: String, required: true },
     mobile: { type: Number, required: true, maxlength: 10 },
     courses: { type: Array, required: true }
