@@ -130,6 +130,35 @@
             }
           }
         }
+      },
+      "/login": {
+        "post": {
+          "tags": [
+            "Login"
+          ],
+          "description": "To login the system",
+          "parameters": [
+            {
+              "name": "login",
+              "in": "body",
+              "description": "Login",
+              "schema": {
+                "$ref": "#/definitions/Login"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "User has logged in",
+              "schema": {
+                "$ref": "#/definitions/Login"
+              }
+            }
+          }
+        }
       }
     },
     "definitions": {
@@ -167,6 +196,20 @@
       "Users": {
         "type": "array",
         "$ref": "#/definitions/User"
+      },
+      "Login": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
       }
     }
   }

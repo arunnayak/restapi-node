@@ -2,6 +2,7 @@ import * as mongoose from "mongoose";
 import { IUser } from './user.model';
 
 const userSchema = new mongoose.Schema({
+    id: {type: String},
     email: {
         type: String,
         required: true,
