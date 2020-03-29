@@ -1,0 +1,16 @@
+[{
+    "name": "InvalidEmail",
+    "message": "Email already exist." 
+},
+{   
+    "name": "InvalidCredentials",
+    "message": "Email or password not match."
+},
+{
+    "name": "DeleteUser",
+    "message": "Successfully deleted the user."
+},
+{
+    "name": "UpdateUser",
+    "message": "Successfully updated the user."
+}]
