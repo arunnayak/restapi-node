@@ -4,13 +4,15 @@ import * as express from "express";
 import * as mongoose from "mongoose";
 import * as swaggerUi from 'swagger-ui-express';
 import { ATLAS_URI } from './config';
+import { LoginRoutes } from './routes/loginRoutes';
 import { UserRoutes } from './routes/userRoutes';
 import * as swaggerDocument from './swagger.json';
 
 class App {
 
     public app: express.Application = express();
-    public routePrv: UserRoutes = new UserRoutes();
+    public userRoutes: UserRoutes = new UserRoutes();
+    public LoginRoutes: LoginRoutes = new LoginRoutes();
     private corsOptions = {
         origin: ['http://localhost:3000', 'http://localhost:8080'],
         optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204  
@@ -19,7 +21,8 @@ class App {
         this.config();
         this.mongoSetup();
         this.swaggerSetup();
-        this.routePrv.routes(this.app);
+        this.userRoutes.routes(this.app);
+        this.LoginRoutes.routes(this.app);
     }
 
     private config(): void {
